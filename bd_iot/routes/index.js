@@ -4,5 +4,6 @@
 
     module.exports = function(app){
         app.get('/',controller.home.index);
+
     };
 })();
