@@ -16,5 +16,11 @@ var DeviceData = function (schema) {
         });
         device.save(callback);
     };
+
+    this.get_devices_list = function(callback){
+        this.model.find({},'',function(err,devices){
+           callback(err,devices);
+        });
+    };
 };
 module.exports = DeviceData;

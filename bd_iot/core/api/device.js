@@ -2,8 +2,8 @@
  * Created by wanghui21 on 2015/5/26.
  */
 (function () {
-    var data =require("../data");
-        status = require("../status"),
+    var data =require("../data"),
+        status = require("../status");
 
     exports.add = function (req, res) {
         var id = req.param("uuid"),
@@ -15,6 +15,6 @@
             }
             res.send({code: status.ok});
         });
-
     };
+
 })();
