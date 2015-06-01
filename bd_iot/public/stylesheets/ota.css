@@ -1,0 +1,95 @@
+#device_manager{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: #e3e8f7;
+}
+
+#ota_aside{
+    width: 210px;
+    height: 100%;
+    position: fixed;
+    background: #424a5d;
+}
+
+#sidebar h5 {
+    color: #f2f2f2;
+    font-weight: 700;
+}
+
+#sidebar ul li {
+    position: relative;
+}
+
+#sidebar .sub-menu > .sub li  {
+    padding-left: 32px;
+}
+
+.nav-collapse.collapse {
+    display: inline;
+}
+
+ul.sidebar-menu {
+    margin-top: 35px;
+}
+
+ul.sidebar-menu li.first {
+    margin-top: 35px;
+}
+
+ul.sidebar-menu li.first a{
+    margin-top: 35px;
+}
+
+ul.sidebar-menu li a{
+    color: #aeb2b7;
+    text-decoration: none;
+    display: block;
+    padding: 15px 0 15px 10px;
+    font-size: 12px;
+    outline: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.ota-body{
+    width: 100%;
+    height: 100%;
+    padding-left: 210px;
+    position: fixed;
+}
+
+.ota-title{
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding-left: 22px;
+    line-height: 51px;
+
+}
+
+.ota-content{
+    height: auto;
+    background: #fff;
+    margin-left: 22px;
+    margin-right: 22px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.ota-content .add{
+    margin: 20px;
+}
+
+.table th, .table td {
+    text-align: center;
+    height:38px;
+}
+
+.ota-content form{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+

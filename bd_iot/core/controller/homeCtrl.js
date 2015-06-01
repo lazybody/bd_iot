@@ -9,6 +9,14 @@
         res.render('index', { title: 'Express' });
     };
 
+    exports.device_manager = function(req,res){
+        res.render('ota/device_manager',{title:'Device Manager'});
+    };
+
+    exports.add_version = function(req,res){
+        res.render('ota/add_version',{title:'Add Version'});
+    };
+
     exports.test_add_device = function(req,res){
         res.render('test/add_device.html',{title:'addDevice'});
     };

@@ -8,14 +8,17 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/header.css'/>
+    <link rel='stylesheet' href='/stylesheets/ota.css'/>
     <script src="/lib/angular/angular.min.js"></script>
     <script src="/lib/angular/angular-resource.min.js"></script>
     <script src="/javascripts/controller/test/testController.js"></script>
     <script src="/javascripts/service/service.js"></script>
 </head>
 <body>
-<div class="main">
-    <%-body%>
-</div>
+    <%-include header/header.html%>
+    <div id="wrap">
+        <%-body%>
+    </div>
 </body>
 </html>

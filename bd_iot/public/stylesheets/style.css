@@ -1,8 +1,16 @@
 body {
-  padding: 50px;
+  padding: 0px;
+  height: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+#wrap{
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+    position: fixed;
 }

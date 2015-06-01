@@ -17,4 +17,8 @@
         });
     };
 
+    exports.get_devices_list = function(req,res){
+
+    };
+
 })();
