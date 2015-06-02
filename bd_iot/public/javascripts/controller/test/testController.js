@@ -8,5 +8,7 @@ app.controller('addDevice',['$scope','data',
         $scope.register = function(){
             data.device.add($scope.device_id,$scope.device_user);
             window.location.href = "/test/devices";
-        }
+        };
     }]);
+
+

@@ -3,7 +3,8 @@
  */
 (function () {
     var data =require("../data"),
-        status = require("../status");
+        status = require("../status"),
+        multer  = require('multer');
 
     exports.add = function (req, res) {
         var id = req.param("uuid"),
@@ -19,6 +20,10 @@
 
     exports.get_devices_list = function(req,res){
 
+    };
+
+    exports.upload_ota_file = function(req,res){
+        res.send(req.files);
     };
 
 })();
