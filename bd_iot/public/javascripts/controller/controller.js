@@ -8,20 +8,18 @@ iot.controller('ota',['$scope','FileUploader',
         var uploader = $scope.uploader = new FileUploader({
             url: '/dm/upload_ota_file'
         });
-        /*$scope.onFileSelect = function($files) {
-            console.log("file count="+$files.length);
-            for(var i=0; i < $files.length;i++){
-                var file = $files[i];
-                $scope.upload = $upload.upload({
-                    url:'/dm/upload_ota_file',
-                    file:file
-                }).progress(function(evt){
-
-                }).success(function(data,status,headers,config){
-
-                });
-            }
-        };*/
+        $scope.upload_result;
+        $scope.upload_result_str;
+        $scope.res_str;
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+            $scope.upload_result_str = "上传成功";
+            $scope.res_str=response;
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+            $scope.upload_result_str = "上传失败";
+        };
 
         $scope.cancel = function(){
             window.location.href = "/dm/device_manager";
