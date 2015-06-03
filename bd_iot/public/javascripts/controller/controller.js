@@ -25,6 +25,10 @@ iot.controller('ota',['$scope','FileUploader','ota',
             $scope.upload_result_str = "上传失败";
         };
 
+        $scope.push = function(){
+            window.location.href = "/dm/upload_ota_file";
+        }
+
         $scope.save = function(){
             $scope.fileObj.ota_uuid = uuid();
             var str = {"ota_uuid":$scope.fileObj.ota_uuid,"version":$scope.fileObj.version,"type":$scope.fileObj.type,
