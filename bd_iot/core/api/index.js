@@ -3,6 +3,7 @@
  */
 (function () {
     module.exports = {
-        device: require("./device")
+        device: require("./device"),
+        ota:require("./ota")
     }
 })();

@@ -9,12 +9,18 @@ var DeviceData = function (schema) {
     this.Schema = schema;
     BaseData.call(this, mongoose.model("devices", schema));
     var self = this;
-    this.add = function(id,name,callback){
+    this.add = function (id, name, callback) {
         var device = new this.model({
-           uuid:id,
-           user:name
+            uuid: id,
+            user: name
         });
         device.save(callback);
+    };
+
+    this.get_devices_list = function (callback) {
+        this.model.find({}, '', function (err, version) {
+            callback(err, version);
+        });
     };
 
 };

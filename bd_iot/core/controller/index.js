@@ -5,6 +5,7 @@
     "use strict";
 
     module.exports = {
-        home: require("./homeCtrl")
+        home: require("./homeCtrl"),
+        ota:require("./otaCtrl")
     };
 })();

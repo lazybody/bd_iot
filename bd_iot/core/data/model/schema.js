@@ -1,1 +1,1 @@
-var mongoose = require('mongoose'),    Schema = mongoose.Schema;schemas = {    device : require("./deviceSchema")};module.exports = schemas;
+var mongoose = require('mongoose'),    Schema = mongoose.Schema;schemas = {    device : require("./deviceSchema"),    ota:require("./otaSchema")};module.exports = schemas;

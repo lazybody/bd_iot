@@ -10,8 +10,9 @@
                     <label class="col-sm-2 control-label">产品型号</label>
 
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="fileObj.product_id">
                             <option value="">--请选择产品型号--</option>
+                            <option value="0">1</option>
                         </select>
                     </div>
                 </div>
@@ -19,7 +20,7 @@
                     <label class="col-sm-2 control-label">升级类型</label>
 
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="fileObj.type">
                             <option value="0">完整升级</option>
                             <option value="1">差分升级</option>
                         </select>
@@ -29,14 +30,14 @@
                     <label class="col-sm-2 control-label">版本号</label>
 
                     <div class="col-sm-4">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="fileObj.version">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">描述</label>
 
                     <div class="col-sm-4">
-                        <textarea rows="3" type="text" class="form-control"></textarea>
+                        <textarea rows="3" type="text" class="form-control" ng-model="fileObj.description"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,14 +74,11 @@
                     <label class="col-sm-2 control-label"></label>
 
                     <div class="col-sm-1">
-                        <button class="btn btn-success form-control">保存</button>
+                        <button class="btn btn-success form-control" ng-click="save()">保存</button>
                     </div>
                     <div class="col-sm-1">
                         <button class="btn btn-default form-control" ng-click="cancel()">取消</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <p>{{res_str}}</p>
                 </div>
             </form>
         </div>

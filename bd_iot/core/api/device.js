@@ -22,8 +22,4 @@
 
     };
 
-    exports.upload_ota_file = function(req,res){
-        res.send(req.files);
-    };
-
 })();

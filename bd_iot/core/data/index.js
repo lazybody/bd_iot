@@ -5,6 +5,7 @@
 var mongoose = require('mongoose'),
     schemas = require("./model/schema"),
     DeviceData = require("./device"),
+    otaData = require("./ota"),
     connectTimes = 0;
 
 var connect = function () {
@@ -26,5 +27,6 @@ connect();
 
 
 module.exports = {
-    Device: new DeviceData(schemas.device)
+    Device: new DeviceData(schemas.device),
+    ota:new otaData(schemas.ota)
 };
