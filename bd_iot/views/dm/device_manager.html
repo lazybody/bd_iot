@@ -1,4 +1,4 @@
-<div class="device_manager">
+<div class="device_manager" ng-controller="ota">
     <%-include device_manager_sidebar.html%>
     <div class="ota-body">
         <div class="ota-title">
@@ -21,9 +21,12 @@
                     if(versions){
                     for(var i=0;i< versions.length;i++){
                     var version = versions[i];
+                    var ota_uuid = version.ota_uuid;
                     var state = "已发布";
+                    var push_state = "0";
                     if(version.state == "0"){
                     state = "未发布";
+                    push_state = "1";
                     }
                     var type = "完整升级";
                     if(version.type == "1"){
@@ -41,9 +44,9 @@
                         <td class="col-lg-3"><%-version.description%></td>
                         <td class="col-lg-1"><%-state%></td>
                         <td>
-                            <a href="javascript:;" ng-click="push()"><%-push%></a>
+                            <a href="javascript:;" ng-click="push('<%-ota_uuid%>','<%-push_state%>')"><%-push%></a>
                             <a >编辑</a>
-                            <a >删除</a>
+                            <a href="javascript:;" ng-click="delete('<%-ota_uuid%>')">删除</a>
                         </td>
                     </tr>
                     <%

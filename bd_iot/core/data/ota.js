@@ -31,5 +31,17 @@ var otaData = function (schema) {
         });
     };
 
+    this.ota_push_version = function(ota_uuid,state,callback){
+        this.model.update({"ota_uuid":ota_uuid}, {$set:{"state":state}}, function(err){
+            callback(err);
+        });
+    };
+
+    this.ota_delete_version =function(ota_uuid,callback){
+        this.model.remove({"ota_uuid":ota_uuid},function(err){
+            callback(err);
+        });
+    };
+
 };
 module.exports = otaData;

@@ -8,8 +8,6 @@
         multer  = require('multer');
 
     exports.add_ota_version = function (req, res) {
-        var id = req.param("uuid"),
-            user = req.param("user");
         var otaObj = [];
         otaObj.uuid = req.param("ota_uuid");
         otaObj.version = req.param("version");
@@ -32,6 +30,30 @@
 
     exports.upload_ota_file = function(req,res){
         getMD5(req,res);
+    };
+
+    exports.ota_push_version = function(req, res){
+        var ota_uuid = req.param("ota_uuid");
+        var state = req.param("state");
+        data.ota.ota_push_version(ota_uuid,state,function(err){
+            if (err) {
+                console.log(err);
+                res.send({code: status.post_error.add_err});
+            }
+            res.send({code: status.ok});
+        });
+        console.log("push_ota_version"+req.param("ota_uuid"));
+    };
+
+    exports.ota_delete_version =function(req,res){
+        var ota_uuid = req.param("ota_uuid");
+        data.ota.ota_delete_version(ota_uuid,function(err){
+            if (err) {
+                console.log(err);
+                res.send({code: status.post_error.add_err});
+            }
+            res.send({code: status.ok});
+        });
     };
 
     var getMD5 = function(req,res){
