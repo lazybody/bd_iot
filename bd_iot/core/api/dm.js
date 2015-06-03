@@ -31,14 +31,29 @@
     };
 
     exports.upload_ota_file = function(req,res){
-        var md5 = getMD5(req.files.file.path);
-        req.files['file']['md5'] =md5;
-        req.files['file']['path']=renameFile(req.files.file.path,md5);
-        res.send(req.files);
+        getMD5(req,res);
     };
 
-    var getMD5 = function(path){
-        return "123456789";
+    var getMD5 = function(req,res){
+        var path = req.files.file.path;
+        var crypto = require('crypto');
+        var fs = require('fs');
+        var md5;
+
+        var shasum = crypto.createHash('md5');
+
+        var s = fs.ReadStream(path);
+        s.on('data', function(d) {
+            shasum.update(d);
+        });
+
+        s.on('end', function() {
+            md5 = shasum.digest('hex');
+            console.log(md5 + '  ' + path);
+            req.files['file']['md5'] =md5;
+            req.files['file']['path']=renameFile(req.files.file.path,md5);
+            res.send(req.files);
+        });
     }
 
     var renameFile = function(path,md5){
@@ -55,7 +70,7 @@
         filePath[filePath.length-1] = newFileName;
         var newFilePath = filePath.join("\\");
         var fs = require("fs");
-        fs.rename(path,newFilePath)
+        fs.rename(path,newFilePath);
     }
 
 })();
