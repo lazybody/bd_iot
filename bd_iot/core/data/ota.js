@@ -26,8 +26,8 @@ var otaData = function (schema) {
     };
 
     this.get_all_version = function (callback) {
-        this.model.find({}, '', function (err, devices) {
-            callback(err, devices);
+        this.model.find({}, '', function (err, versions) {
+            callback(err, versions);
         });
     };
 

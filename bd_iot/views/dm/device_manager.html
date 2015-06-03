@@ -1,0 +1,45 @@
+<div id="device_manager">
+    <%-include device_manager_sidebar.html%>
+    <div class="ota-body">
+        <div class="ota-title">
+            <p>设备管理 /OTA</p>
+        </div>
+        <div class="ota-content">
+            <a href="/dm/add_version" class="btn btn-success add">添加版本</a>
+
+            <div class="add">
+                <table class="table table-striped table-bordered table-hover table-responsive ">
+                    <tr class="warning">
+                        <td class="col-lg-2">产品</td>
+                        <td>版本号</td>
+                        <td>类型</td>
+                        <td class="col-lg-3">描述</td>
+                        <td class="col-lg-1">状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <%
+                    if(versions){
+                    for(var i=0;i< versions.length;i++){
+                    var version = versions[i];
+                    var state = "已发布";
+                    if(version.state == "0"){
+                    state = "未发布";
+                    }
+                    %>
+                    <tr class="warning">
+                        <td class="col-lg-2"><%-version.product_id%></td>
+                        <td><%-version.version%></td>
+                        <td><%-version.type%></td>
+                        <td class="col-lg-3"><%-version.description%></td>
+                        <td class="col-lg-1"><%-state%></td>
+                        <td>操作</td>
+                    </tr>
+                    <%
+                    }
+                    }
+                    %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

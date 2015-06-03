@@ -6,6 +6,6 @@
 
     module.exports = {
         home: require("./homeCtrl"),
-        ota:require("./otaCtrl")
+        dm:require("./dmCtrl")
     };
 })();

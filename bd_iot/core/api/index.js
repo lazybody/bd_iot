@@ -4,6 +4,6 @@
 (function () {
     module.exports = {
         device: require("./device"),
-        ota:require("./ota")
+        dm:require("./dm")
     }
 })();

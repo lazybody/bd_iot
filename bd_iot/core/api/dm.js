@@ -7,7 +7,7 @@
         status = require("../status"),
         multer  = require('multer');
 
-    exports.add = function (req, res) {
+    exports.add_ota_version = function (req, res) {
         var id = req.param("uuid"),
             user = req.param("user");
         var otaObj = [];
