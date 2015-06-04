@@ -5,25 +5,6 @@ var iot = angular.module("iot", ['angularFileUpload', 'ota_service']);
 
 iot.controller('ota', ['$scope', 'FileUploader', 'ota',
     function ($scope, FileUploader, ota) {
-        var uploader = $scope.uploader = new FileUploader({
-            url: '/dm/upload_ota_file'
-        });
-        $scope.upload_result;
-        $scope.upload_result_str;
-        $scope.res_str;
-        $scope.fileObj = [];
-        uploader.onSuccessItem = function (fileItem, response, status, headers) {
-            console.info('onSuccessItem', fileItem, response, status, headers);
-            $scope.upload_result_str = "上传成功";
-            $scope.res_str = response;
-            $scope.fileObj.url = response.file.path;
-            $scope.fileObj.size = response.file.size;
-            $scope.fileObj.md5 = response.file.md5;
-        };
-        uploader.onErrorItem = function (fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
-            $scope.upload_result_str = "上传失败";
-        };
 
         $scope.push = function (ota_uuid, state) {
             ota.ota_version.push(ota_uuid, state)
@@ -34,6 +15,10 @@ iot.controller('ota', ['$scope', 'FileUploader', 'ota',
                 });
         };
 
+        $scope.edit = function(ota_uuid){
+            window.location.href = "/dm/add_version:"+ota_uuid;
+        }
+
         $scope.delete = function(ota_uuid){
             ota.ota_version.delete(ota_uuid)
                 .success(function (result) {
@@ -43,14 +28,61 @@ iot.controller('ota', ['$scope', 'FileUploader', 'ota',
                 });
         };
 
+    }]);
+
+iot.controller('edit_version', ['$scope', 'FileUploader', 'ota',
+    function ($scope, FileUploader, ota) {
+        var uploader = $scope.uploader = new FileUploader({
+            url: '/dm/upload_ota_file'
+        });
+        $scope.upload_result;
+        $scope.upload_result_str;
+        $scope.res_str;
+        var path_name = window.location.pathname;
+        $scope.fileObj;
+        if(path_name.charAt(path_name.length-1) == ":") {
+            $scope.fileObj = [];
+        }else{
+            var path_split = path_name.split(":");
+            $scope.ota_uuid = path_split[path_split.length-1];
+            ota.ota_version.get_for_uuid($scope.ota_uuid)
+                .success(function(result){
+                    $scope.fileObj = result.data;
+                });
+        }
+        uploader.onSuccessItem = function (fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+            $scope.upload_result_str = "上传成功";
+            $scope.res_str = response;
+            $scope.fileObj.url = response.file.path;
+            $scope.fileObj.size = response.file.size;
+            $scope.fileObj.md5 = response.file.md5;
+            //$scope.res_str = $scope.fileObj.url;
+        };
+        uploader.onErrorItem = function (fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+            $scope.upload_result_str = "上传失败";
+        };
+
         $scope.save = function () {
-            $scope.fileObj.ota_uuid = uuid();
+            var edit = true;
+            $scope.fileObj.firm_id = "123";
+            if(!$scope.fileObj.ota_uuid) {
+                $scope.fileObj.ota_uuid = uuid();
+                edit = false;
+            }
             var str = {"ota_uuid": $scope.fileObj.ota_uuid, "version": $scope.fileObj.version, "type": $scope.fileObj.type,
                 "firm_id": $scope.fileObj.firm_id, "product_id": $scope.fileObj.product_id, "url": $scope.fileObj.url,
                 "size": $scope.fileObj.size, "md5": $scope.fileObj.md5, "description": $scope.fileObj.description, "state": "0"};
-            ota.ota_version.add(str).success(function (result) {
-                window.location.href = "/dm/device_manager";
-            });
+            if(!edit) {
+                ota.ota_version.add(str).success(function (result) {
+                    window.location.href = "/dm/device_manager";
+                });
+            }else{
+                ota.ota_version.update(str).success(function(result){
+                    window.location.href = "/dm/device_manager";
+                });
+            }
         };
 
         $scope.cancel = function () {

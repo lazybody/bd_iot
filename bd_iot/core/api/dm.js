@@ -32,6 +32,27 @@
         getMD5(req,res);
     };
 
+    exports.ota_update_version = function(req,res){
+        var otaObj = [];
+        otaObj.uuid = req.param("ota_uuid");
+        otaObj.version = req.param("version");
+        otaObj.type = req.param("type");
+        otaObj.firm_id = req.param("firm_id");
+        otaObj.product_id = req.param("product_id");
+        otaObj.url = req.param("url");
+        otaObj.size = req.param("size");
+        otaObj.md5 = req.param("md5");
+        otaObj.description = req.param("description");
+        console.log(otaObj);
+        data.ota.ota_update_version(otaObj,function(err){
+            if (err) {
+                console.log(err);
+                res.send({code: status.post_error.add_err});
+            }
+            res.send({code: status.ok});
+        });
+    }
+
     exports.ota_push_version = function(req, res){
         var ota_uuid = req.param("ota_uuid");
         var state = req.param("state");
@@ -53,6 +74,17 @@
                 res.send({code: status.post_error.add_err});
             }
             res.send({code: status.ok});
+        });
+    };
+
+    exports.ota_get_by_uuid =function(req,res){
+        var ota_uuid = req.param("ota_uuid");
+        data.ota.ota_get_by_uuid(ota_uuid.substring(1,ota_uuid.length),function(err,version){
+            if (err) {
+                console.log(err);
+                res.send({code: status.post_error.add_err});
+            }
+            res.send({code: status.ok,data:version});
         });
     };
 
@@ -93,6 +125,7 @@
         var newFilePath = filePath.join("\\");
         var fs = require("fs");
         fs.rename(path,newFilePath);
+        return newFileName;
     }
 
 })();

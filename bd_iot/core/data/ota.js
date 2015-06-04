@@ -25,6 +25,13 @@ var otaData = function (schema) {
         device.save(callback);
     };
 
+    this.ota_update_version = function(otaObj,callback){
+        this.model.update({"ota_uuid":otaObj.uuid}, {$set:{"version":otaObj.version,"type":otaObj.type,
+            "firm_id":otaObj.firm_id,"product_id":otaObj.product_id,"url":otaObj.url,"size":otaObj.size,"md5":otaObj.md5,"description":otaObj.description}}, function(err){
+            callback(err);
+        });
+    };
+
     this.get_all_version = function (callback) {
         this.model.find({}, '', function (err, versions) {
             callback(err, versions);
@@ -40,6 +47,13 @@ var otaData = function (schema) {
     this.ota_delete_version =function(ota_uuid,callback){
         this.model.remove({"ota_uuid":ota_uuid},function(err){
             callback(err);
+        });
+    };
+
+    this.ota_get_by_uuid = function(ota_uuid,callback){
+        console.log("ota get by version="+ota_uuid);
+        this.model.findOne({"ota_uuid":ota_uuid},function(err,version){
+            callback(err,version);
         });
     };
 

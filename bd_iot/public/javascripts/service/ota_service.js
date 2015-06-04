@@ -14,6 +14,12 @@ service.factory('ota',['$http',function($http){
             },
             delete:function(ota_uuid){
                 return $http.put("/dm/ota_delete",{"ota_uuid":ota_uuid});
+            },
+            get_for_uuid:function(ota_uuid){
+                return $http.get("/dm/ota_get_version:"+ota_uuid);
+            },
+            update:function(otaObj){
+                return $http.put("/dm/ota_update_version",otaObj);
             }
         }
     };
