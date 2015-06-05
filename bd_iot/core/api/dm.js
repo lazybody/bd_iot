@@ -88,6 +88,27 @@
         });
     };
 
+    exports.ota_check_update = function(req,res){
+        var device_id = req.param("device_id");
+        var product_id = req.param("product_id");
+        var version = req.param("version");
+        var callback = req.param("callback");
+        res.setHeader('Access-Control-Allow-Credentials', true);//告诉客户端可以在HTTP请求中带上Cookie
+        res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers',' X-Requested-With');
+        data.ota.ota_check_update("123",product_id,version,function(err,versions){
+            console.log(versions);
+            if (err) {
+                console.log(err);
+                res.send({code: status.post_error.add_err});
+            }
+            //res.send({"code": status.ok,"data":versions});
+            var str ="angular.callbacks._0("+JSON.stringify(versions)+")";
+            console.log(str);
+            res.send(str);
+        });
+    }
+
     var getMD5 = function(req,res){
         var path = req.files.file.path;
         var crypto = require('crypto');
