@@ -97,20 +97,44 @@
         res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers',' X-Requested-With');
         data.ota.ota_check_update("123",product_id,version,function(err,versions){
-            console.log(versions);
             if (err) {
                 console.log(err);
                 res.send({code: status.post_error.add_err});
             }
+            var newVersions = [];
+            for(var i =0;i < versions.length;i++){
+                var versionItem = versions[i]['version'];
+                if(checkVersion(version,versionItem)){
+                    newVersions.push(versions[i]);
+                }
+            }
             var str="";
             if(callback) {
-                str = "angular.callbacks._0(" + JSON.stringify(versions) + ")";
+                str = "angular.callbacks._0(" + JSON.stringify(newVersions) + ")";
             }else{
-                str = JSON.stringify(versions);
+                str = JSON.stringify(newVersions);
             }
             res.send(str);
         });
-    }
+    };
+
+    var checkVersion = function(version,newVersion){
+        var verArray = version.split('.');
+        var newVerArray = newVersion.split('.');
+        console.log(version+","+newVersion);
+        for(var i=0;i<verArray.length && i<newVerArray.length;i++){
+            if(newVerArray[i] > verArray[i]){
+                return true;
+            }else if(newVerArray[i] < verArray[i]){
+                return false;
+            }
+        }
+        if(newVerArray.length > verArray.length){
+            return true;
+        }else{
+            return false;
+        }
+    };
 
     var getMD5 = function(req,res){
         var path = req.files.file.path;
