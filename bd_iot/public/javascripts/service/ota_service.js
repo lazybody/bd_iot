@@ -20,6 +20,9 @@ service.factory('ota',['$http',function($http){
             },
             update:function(otaObj){
                 return $http.put("/dm/ota_update_version",otaObj);
+            },
+            check:function(device_id,product_id,version){
+                return $http.get("/dm/ota_check_update?device_id="+device_id+"&product_id="+product_id+"&version="+version);
             }
         }
     };

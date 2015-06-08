@@ -1,0 +1,24 @@
+<div class="device_manager" ng-controller="ota">
+    <%-include device_manager_sidebar.html%>
+    <div class="ota-body user_device_body">
+        <div ng-controller="device_info">
+            <div>
+                <h2>设备基本信息：</h2>
+
+                <p>型号：<%-device_info.product_id%></p>
+
+                <p>版本：<%-device_info.version%></p>
+
+                <p>ID:<%-device_info.device_id%></p>
+            </div>
+            <div>
+                <button class="btn btn-success"
+                        ng-click="check_version('<%-device_info.device_id%>','<%-device_info.product_id%>','<%-device_info.version%>')">
+                    检测更新
+                </button>
+            </div>
+            <p>{{check_update}}</p>
+            
+        </div>
+    </div>
+</div>
