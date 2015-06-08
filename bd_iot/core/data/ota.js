@@ -59,7 +59,7 @@ var otaData = function (schema) {
 
     this.ota_check_update = function(firm_id,product_id,version,callback){
         console.log("check update firm_id="+firm_id+",product_id="+product_id+",version="+version);
-        this.model.find({"firm_id":firm_id,"product_id":product_id},function(err,versions){
+        this.model.find({"firm_id":firm_id,"product_id":product_id,"state":"1"},function(err,versions){
             callback(err,versions);
         });
     }
