@@ -15,7 +15,7 @@
         app.post('/dm/upload_ota_file',otaMulter,api.dm.upload_ota_file);
         app.post('/dm/add_ota',api.dm.add_ota_version);
         app.put('/dm/ota_push',api.dm.ota_push_version);
-        app.put('/dm/ota_delete',api.dm.ota_delete_version)
+        app.put('/dm/ota_delete',api.dm.ota_delete_version);
         app.put('/dm/ota_update_version',api.dm.ota_update_version);
         app.get('/dm/ota_check_update',api.dm.ota_check_update);
         app.get('/dm/user_device',controller.dm.user_device);
