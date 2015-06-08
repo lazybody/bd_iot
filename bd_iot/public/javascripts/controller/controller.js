@@ -92,10 +92,16 @@ iot.controller('edit_version', ['$scope', 'FileUploader', 'ota',
 
 iot.controller('device_info',['$scope','ota',
     function($scope,ota){
+        $scope.check_result = "";
         $scope.check_update = "";
         $scope.check_version = function(device_id,product_id,version){
             ota.ota_version.check(device_id,product_id,version)
                 .success(function(result){
+                    if(result.length>0){
+                        $scope.check_result = "发现新版本";
+                    }else{
+                        $scope.check_result = "已经是最新版本";
+                    }
                     $scope.check_update = result;
                 }).error(function(err){
                     $scope.check_update = "error";

@@ -17,8 +17,10 @@
                     检测更新
                 </button>
             </div>
-            <p>{{check_update}}</p>
-            
+            <p>{{check_result}}</p>
+            <ul ng-repeat="result in check_update">
+                <li>{{result.version}} : {{result.description}}</li>
+            </ul>
         </div>
     </div>
 </div>
