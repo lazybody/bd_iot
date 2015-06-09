@@ -1,7 +1,7 @@
 <div class="device_manager" ng-controller="edit_version">
     <%-include device_manager_sidebar.html%>
     <div class="ota-body">
-        <div class="ota-title">
+        <div  class="ota-title">
             <p>设备管理 /OTA/添加版本</p>
         </div>
         <div class="ota-content">
@@ -17,6 +17,7 @@
                             <option value="MT777">MT777</option>
                         </select>
                     </div>
+                    <span ng-show="!fileObj.product_id" class="err">{{product_id_err}}</span>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">升级类型</label>
@@ -27,6 +28,7 @@
                             <option value="1">差分升级</option>
                         </select>
                     </div>
+                    <span ng-show="!fileObj.type" class="err">{{type_err}}</span>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">版本号</label>
@@ -34,6 +36,7 @@
                     <div class="col-sm-4">
                         <input type="text" class="form-control" ng-model="fileObj.version">
                     </div>
+                    <span ng-show="!fileObj.version" class="err">{{version_err}}</span>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">描述</label>
@@ -41,6 +44,7 @@
                     <div class="col-sm-4">
                         <textarea rows="3" type="text" class="form-control" ng-model="fileObj.description"></textarea>
                     </div>
+                    <span ng-show="!fileObj.description" class="err">{{description_err}}</span>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">文件</label>
@@ -54,7 +58,9 @@
                         </div>
                         <button class="btn btn-default " onclick="$('input[id=lefile]').click();">选择</button>
                         <button class="btn btn-default " ng-click="uploader.queue[uploader.queue.length-1].upload()"
-                                ng-disabled="uploader.queue.length < 1 || uploader.queue[uploader.queue.length-1].isReady || uploader.queue[uploader.queue.length-1].isUploading || uploader.queue[uploader.queue.length-1].isSuccess">上传</button>
+                                ng-disabled="uploader.queue.length < 1 || uploader.queue[uploader.queue.length-1].isReady || uploader.queue[uploader.queue.length-1].isUploading || uploader.queue[uploader.queue.length-1].isSuccess">
+                            上传
+                        </button>
                     </div>
 
                     <script type="text/javascript">
@@ -65,12 +71,21 @@
                 </div>
                 <div class="form-group" ng-show="uploader.queue.length > 0">
                     <label class="col-sm-2 control-label"></label>
+
                     <div class="col-sm-4">
                         <div class="progress ">
-                            <div class="progress-bar " role="progressbar" ng-style="{ 'width': uploader.queue[uploader.queue.length-1].progress + '%' }"></div>
+                            <div class="progress-bar " role="progressbar"
+                                 ng-style="{ 'width': uploader.queue[uploader.queue.length-1].progress + '%' }"></div>
                         </div>
                     </div>
-                    <span>{{upload_result_str}}</span>
+                    <span >{{upload_result_str}}</span>
+                </div>
+                <div class="form-group" ng-show="file_ok">
+                    <label class="col-sm-2 control-label"></label>
+
+                    <div class="col-sm-4">
+                        <span>请上传升级包</span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label"></label>

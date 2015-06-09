@@ -57,14 +57,32 @@ iot.controller('edit_version', ['$scope', 'FileUploader', 'ota',
             $scope.fileObj.url = response.file.path;
             $scope.fileObj.size = response.file.size;
             $scope.fileObj.md5 = response.file.md5;
+            $scope.file_ok = null;
             //$scope.res_str = $scope.fileObj.url;
         };
         uploader.onErrorItem = function (fileItem, response, status, headers) {
             console.info('onErrorItem', fileItem, response, status, headers);
             $scope.upload_result_str = "上传失败";
+            $scope.file_ok = null;
         };
 
         $scope.save = function () {
+            if(!$scope.fileObj.product_id){
+                $scope.product_id_err = "请选择产品型号";
+                return;
+            }else if(!$scope.fileObj.type){
+                $scope.type_err = "请选择升级类型";
+                return;
+            }else if(!$scope.fileObj.version){
+                $scope.version_err = "请填写版本号";
+                return;
+            }else if(!$scope.fileObj.description){
+                $scope.description_err = "请填写描述";
+                return;
+            }else if(!$scope.fileObj.url){
+                $scope.file_ok = 1;
+                return;
+            }
             var edit = true;
             $scope.fileObj.firm_id = "123";
             if(!$scope.fileObj.ota_uuid) {
