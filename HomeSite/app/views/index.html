@@ -1,0 +1,87 @@
+{% extends 'layouts/master.html' %}
+{% block bodyAttr %}ng-controller="HomeController"{% endblock %}
+{% block content %}
+<section class="what-we-are">
+    <div class="wrap">
+        <div class="home-box">
+            <h2 translate="slogan"></h2>
+            <a href="about" class="btn common-btn" translate="about_us"></a>
+            <a href="contact" class="btn common-btn" translate="hire_us"></a>
+        </div>
+    </div>
+</section>
+<!--
+<section class="what-we-work">
+    <h2 translate="what_we_done">What we have done</h2>
+    <carousel interval="myInterval">
+        <slide ng-repeat="work in projects" active="work.active" class="wrap">
+            <h3><a ng-href="/workdetails#{{'work.ID'}}" ng-bind="work.proj_name" target="_self"></a></h3>
+            <div class="carousel-caption">
+                <p ng-bind="work.description_title"></p>
+            </div>
+            <div class="carousel-cover">
+                <img ng-src="{{'work.cover'}}">
+            </div>
+        </slide>
+    </carousel>
+</section>
+-->
+<section class="what-we-love">
+    <h2 translate="what_welove"></h2>
+    <ul class="programming-manners">
+        <li class="end">
+            <div class="illustration fa fa-bell-o"></div>
+            <p translate="love_one"></p>
+        </li>
+        <li>
+            <div class="illustration fa fa-laptop"></div>
+            <p translate="love_two"></p>
+        </li>
+        <li>
+            <div class="illustration fa fa-unlock"></div>
+            <p translate="love_three"></p>
+        </li>
+        <li class="last">
+            <div class="illustration fa fa-user"></div>
+            <p translate="love_four"></p>
+        </li>
+    </ul>
+
+    <a href="/projectplan" title="submit your project plan to us" target="_self" translate="submit"><i class="fa fa-hand-o-right"></i></a>
+</section>
+<section class="what-we-can">
+    <h2 translate="what_we_can">what we can do</h2>
+    <h3 translate="what_we_can_language">Programming Language We Used</h3>
+    <ul class="programming-language">
+        <li ng-repeat="language in languages" ng-class="language.class" ng-bind="language.name"></li>
+    </ul>
+    <h3 translate="what_we_can_technology">Technology We Used</h3>
+    <ul class="programming-technology">
+        <li ng-repeat="technology in technologies" ng-class="getTechClass(technology.familiarity)" ng-bind="technology.name"></li>
+    </ul>
+
+</section>
+<section class="how-we-manage">
+    <h2 translate="manage_team"></h2>
+    <ul class="skill-container clearfix">
+        <li>
+            <h3 translate="team"></h3>
+            <ul class="skill-list">
+                <li ng-repeat="item in roles"><i class="fa fa-check"></i> {{item.name}}</li>
+             </ul>
+        </li>
+        <li>
+            <h3 translate="skills"></h3>
+            <ul class="skill-list">
+                <li ng-repeat="item in skills"><i class="fa fa-check"></i> {{item.name}}</li>
+            </ul>
+        </li>
+        <li>
+            <h3 translate="management"></h3>
+            <ul class="skill-list">
+                <li ng-repeat="item in management"><i class="fa fa-check"></i> {{item.name}}</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+{% endblock %}

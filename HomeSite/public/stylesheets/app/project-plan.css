@@ -1,0 +1,80 @@
+.send-project {
+  padding: 2% 0;
+}
+.send-project .info {
+  color: #e1704b;
+  margin-bottom: 1em;
+}
+.send-project .form-group {
+  width: 50%;
+  padding: 0 3%;
+  margin-bottom: 0;
+}
+.send-project .form-group input,
+.send-project .form-group select {
+  height: 3em!important;
+  margin-bottom: 1em;
+  padding: 0 0.9em;
+}
+.send-project .form-group input[type="radio"] {
+  height: auto;
+}
+.send-project .form-group .common-btn {
+  height: 15%;
+}
+.send-project .form-group textarea {
+  height: 7em;
+  margin-bottom: 1em;
+}
+.send-project .form-group b {
+  font-size: 24px;
+}
+.send-project .form-group input.radio {
+  margin: 20px;
+  display: inline-block;
+}
+.project-wrap {
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
+  max-width: 1140px;
+  position: relative;
+}
+.bigradioholder {
+  width: 5%;
+  background: #fff;
+  font-size: 1em;
+  color: #666;
+  -o-transition: 0.1s ease-out;
+  -ms-transition: 0.1s ease-out;
+  -moz-transition: 0.1s ease-out;
+  -webkit-transition: 0.1s ease-out;
+  transition: 0.1s ease-out;
+  cursor: pointer;
+}
+.bigradioholder:hover {
+  background-color: #eee;
+}
+.pro-col1,
+.pro-col2 {
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+.pro-col1 {
+  float: left;
+}
+.pro-col2 {
+  float: right;
+}
+/* Smartphones ----------- */
+@media only screen and (max-width: 580px) and (min-width: 0) {
+  .send-project .form-group {
+    width: 90%;
+    height: auto;
+    float: none;
+    margin: 0 auto;
+    padding: 0;
+  }
+}

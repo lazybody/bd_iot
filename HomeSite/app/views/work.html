@@ -1,0 +1,21 @@
+{% extends 'layouts/master.html' %}
+{% block bodyAttr %}ng-controller="WorkController"{% endblock %}
+{% block content %}
+<div class="work-wrap">
+  <div>
+    <ul class="work-row">
+        <li class="col-lg-4" ng-repeat="pro in project">
+            <a ng-href="/workdetails#{{'pro.ID'}}">
+                <figure>
+                    <img ng-cloak ng-src="{{'pro.cover'}}"/>
+                </figure>
+            </a>
+            <h3 ng-bind="pro.proj_name"></h3>
+
+            <q ng-bind="pro.description" class="description"></q>
+
+        </li>
+    </ul>
+</div>
+</div>
+{% endblock %}

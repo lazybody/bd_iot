@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html data-app="erealm">
+<head>
+    <meta charset="utf-8">
+    <!--[if lte IE 8 ]>
+    <meta http-equiv=refresh content="0; URL=/helper/upgrade.html">
+    <script>window.location.href="/helper/upgrade.html";</script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eRealm Info & Tech</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="author" href="humans.txt">
+    <!-- build:css /stylesheets/libs.min.css -->
+    <link rel="stylesheet" href="/stylesheets/libs/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/libs/material.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/libs/ripples.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/libs/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/libs/reset.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheets/libs/erealmFont.css" type="text/css" />
+    <!-- endbuild -->
+    <!-- build:css /stylesheets/app.min.css -->
+    <link rel="stylesheet" href="/stylesheets/app.css" type="text/css"/>
+    <!-- endbuild -->
+</head>
+<body {% block bodyAttr %}{% endblock %}  scroll>
+<header role="banner" ng-click="$spMenu.hide()">
+    <div class="wrap">
+        <div class="logo-mark"><a href="/"></a></div>
+        <section class="intro">
+            <span translate="subtittle"></span>
+            <h1 translate="maintittle"></h1>
+        </section>
+    </div>
+    <div class="git-fock">
+        <a href="https://github.com/eRealm" target="_blank">Fork me on GitHub</a>
+    </div>
+</header>
+<div class="muti-language">
+    <div class="btn-group clearfix" dropdown>
+        <button type="button" class="btn btn-default" translate="language"></button>
+        <button type="button" class="btn btn-default  dropdown-toggle" dropdown-toggle>
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a  href="javascript:void(0)" language key="cn">简体中文</a></li>
+            <li class="divider"></li>
+            <li><a  href="javascript:void(0)" language key="en">English</a></li>
+        </ul>
+    </div>
+</div>
+<div class="nav-container" >
+    <nav ng-class="{fixed: showFixedHeader}">
+        <div class="wrap">
+            <div class="sub-logo-mark"><a href="/"></a></div>
+            <div class="nav-link fa fa-bars" ng-click="$spMenu.toggle()"></div>
+            <ul id="navslide">
+                <li class="withripple" ng-class="{active: currentPage == 'home-page'}"><a href="/" translate="home">home</a></li>
+                <li class="withripple" ng-class="{active: currentPage == 'blog-page'}"><a href="/news" translate="blog">news</a><span class="blog-badge ng-hide" ng-bind="postsNotification" ng-show="postsNotification > 0">1</span></li>
+                <li class="withripple" ng-class="{active: currentPage == 'contact-page'}"><a href="/contact" translate="contact">contact</a></li>
+                <li class="withripple" ng-class="{active: currentPage == 'about-page'}"><a href="/about" translate="about">about</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div id="sp-nav" class="page-menu-slide">
+    <ul class="nav-slide">
+        <li><a href="/" translate="home"></a></li>
+        <li><a href="/news" translate="blog"></a></li>
+        <li><a href="/contact" translate="contact"></a></li>
+        <li><a href="/about" translate="about"></a></li>
+        <li class="divider"></li>
+        <li><a  href="javascript:void(0)" language key="cn">简体中文</a></li>
+        <li><a  href="javascript:void(0)" language key="en">English</a></li>
+    </ul>
+</div>
+<div class="content" ng-click="$spMenu.hide()">
+    {% block content %}{% endblock %}
+</div>
+<footer role="contentinfo">
+    <div class="contact wrap">
+        <h2 translate="say_hello"></h2>
+        <p translate="say_content"></p>
+        <ul>
+            <li><a href="mailto:hello@erealmsoft.com" ng-attr-href="{{'emaillink'| translate}}" class="circle-icon" ng-attr-title="{{'sendus_email'| translate}}"><span class="fa fa-envelope"></span></a></li>
+            <li><a href="https://github.com/eRealm" class="circle-icon" ng-attr-title="{{ 'follow_us'| translate}}" target="_blank"><span class="fa fa-github"></span></a></li>
+            <li><a href="http://erealm.tumblr.com" class="circle-icon" ng-attr-title="{{ 'scan_blog'| translate}}" ><span class="fa fa-tumblr"></span></a></li>
+            <li><a href="http://weibo.com/erealm2014" class="circle-icon" ng-attr-title="{{ 'follow_weibo'| translate}}" ><span class="fa fa-weibo"></span></a></li>
+            <li><a href="/projectPlan" class="circle-icon" ng-attr-title="{{ 'submit_project'| translate}}"><span class="fa fa-send"></span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        <p translate="copyright"></p>
+        <p><span translate="powerby"></span><a href="http://blog.erealmsoft.com" target="_blank">eRealm</a> @2015(V#version)</p>
+        <p translate="property"></p>
+    </div>
+    <a class="back-top fa fa-level-up" href="javascript: void(0)" ng-show="showFixedHeader" backtop></a>
+</footer>
+<div class="overlay-message" ng-show="mainLoading">
+    <ul class="loader">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script type="text/ng-template" id="main_message.html">
+    <div class="modal-header">
+        <h4 class="modal-title">
+            <i class="glyphicon"></i>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <p>{{mainMessage}}</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="$dismiss()">OK</button>
+    </div>
+</script>
+<!-- build:js /javascripts/libs.min.js -->
+<script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/libs/angular.min.js"></script>
+<script src="/javascripts/libs/plugins/angular-cookies.min.js"></script>
+<script src="/javascripts/libs/plugins/angular-translate.min.js"></script>
+<script src="/javascripts/libs/plugins/angular-translate-storage-cookie.min.js"></script>
+<script src="/javascripts/libs/plugins/ui-bootstrap-tpls.min.js"></script>
+<script src="/javascripts/libs/plugins/ng-mobile-menu.min.js"></script>
+<script src="/javascripts/libs/plugins/moment-with-locales.js"></script>
+<script src="/javascripts/libs/plugins/material.min.js"></script>
+<script src="/javascripts/libs/plugins/ripples.min.js"></script>
+<script src="http://127.0.0.1:35729/livereload.js" cache="false"></script>
+<!-- endbuild -->
+<!-- build:js /javascripts/app.min.js -->
+<script src="/javascripts/erealm.js"></script>
+<script src="/javascripts/language.js"></script>
+<script src="/javascripts/clients.js"></script>
+<script src="/javascripts/app/homeController.js"></script>
+<script src="/javascripts/app/contactController.js"></script>
+<script src="/javascripts/app/aboutController.js"></script>
+<script src="/javascripts/app/blogController.js"></script>
+<script src="/javascripts/app/workController.js"></script>
+<script src="/javascripts/app/projectController.js"></script>
+<script src="/javascripts/app/workDetailsController.js"></script>
+<!-- endbuild -->
+<script>
+    angular.element(document).ready(function() {
+        // Launch jdk module. Here we go!
+        var id = angular.element(document.querySelector('html')).attr('data-app');
+        console.log('booting angular app: ' + id);
+        angular.bootstrap(document, [id]);
+
+        $.material.init();
+    });
+
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff534d05eaba4bd1d41c0106fe343b21f' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

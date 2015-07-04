@@ -1,0 +1,13 @@
+{% extends 'layouts/master.html' %}
+{% block bodyAttr %}ng-controller="BlogController"{% endblock %}
+{% block content %}
+<div class="blog-list">
+    <ul class="wrap">
+        <li ng-repeat="blog in blogs">
+            <time ng-datetime="blog.date" ng-bind="formatDate(blog.date)"></time>
+            <h2 ng-bind="blog.title"></h2>
+            <p ng-bind-html="trustHtml(blog.body)"></p>
+        </li>
+    </ul>
+</div>
+{% endblock %}

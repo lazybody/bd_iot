@@ -1,5 +1,6 @@
 bd_iot/.idea/
 bd_iot/node_modules/
+HomeSite/node_modules/
 user_app/node_modules/
 bd_iot/ota/
 bd_iot/public/ota/

@@ -1,0 +1,48 @@
+{% extends 'layouts/master.html' %}
+{% block bodyAttr %}ng-controller="ContactController"{% endblock %}
+{% block content %}
+<div class="contact-details">
+    <div class="circle-icon"><span class="fa fa-envelope"></span></div>
+    <a  ng-attr-href="{{'emaillink'| translate}}" translate="email"></a>
+    <hr>
+    <p></p>
+    <ul class="contact-address">
+        <li ng-repeat="item in contacts" ng-class="{active: activeMap == item.name}">
+            <!--http://goo.gl/6QoZt8-->
+            <i class="location-marker fa fa-map-marker"></i>
+            <a href="javascript:void(0);" ng-click="changeMap(item)" ng-bind="item.location"></a>
+            <div class="address">
+                <span ng-bind="item.info.address"></span>
+                <span ng-bind="item.info.region"></span>
+                <span ng-bind="item.info.county"></span>
+                <span ng-bind="item.info.postcode"></span>
+                <span ng-bind="item.info.country"></span>
+                <span><b ng-bind="item.info.contact"></b></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="google_map" class="google-map"></div>
+<div class="send-message">
+    <div class="wrap">
+        <h2 translate="send_us"></h2>
+        <form ng-submit="sendMessage();" name="contact_form" method="" action="" novalidate="novalidate" role="form">
+            <p class="info" translate="make_sure"></p>
+            <fieldset>
+                <div class="form-group left">
+                    <textarea name="message" class="form-control" ng-class="{error: (contact_form.message.$dirty || submitted) && contact_form.message.$invalid}"
+                              ng-model="message" title="Enter your message" ng-maxlength="300" required="required" ng-attr-placeholder="{{'pop_message'| translate}}"></textarea>
+                </div>
+                <div class="form-group right">
+                    <input type="text" class="form-control" name="name" ng-maxlength="20" ng-class="{error: (contact_form.name.$dirty || submitted) && contact_form.name.$invalid}" ng-model="name" title="Enter your name" required="required" ng-attr-placeholder="{{'your_name'| translate}}">
+                    <input type="email" class="form-control" name="email" ng-maxlength="50" ng-class="{error: (contact_form.email.$dirty || submitted) && contact_form.email.$invalid}" type="email" ng-model="email" title="Enter your email" required="required" ng-attr-placeholder="{{'your_email'| translate}}">
+                    <button class="btn common-btn reset" name="reset" type="reset" ng-click="reloading()" translate="reset" ></button>
+                    <button class="btn common-btn" name="submit" type="submit" ng-click="submitted=true" ng-disabled="loading" translate="send_message"></button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=olYx7rdeo03neDKMiWQaxoio"></script>
+<!--<script src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layouts/master.html' %}
+{% block bodyAttr %}ng-controller="AboutController"{% endblock %}
+{% block content %}
+<section class="detail-we-are">
+    <div class="back" ng-class="homeBack"></div>
+    <div class="wrap">
+        <div class="about-box">
+            <h2 class="about-h1" translate="aboutlove"></h2>
+            <div class="about-center">
+                <p translate="aboutlove_one">
+                </p>
+                <p translate="aboutlove_two">
+                </p>
+                <p translate="aboutlove_three">
+                </p>
+                <p translate="aboutlove_four">
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="our-team">
+    <div class="wrap">
+        <h2 translate="our_team"></h2>
+        <h3 translate="welove"></h3>
+        <ul class="clearfix">
+            <li class="profile" ng-repeat="item in person">
+                <figure>
+                    <img ng-cloak ng-cloak class="img-responsive"
+                         ng-src="{{item.photo}}"/>
+                    <p ng-bind="item.description" class="description"></p>
+                </figure>
+                <h3 ng-bind="item.first_name"></h3>
+                <h4 ng-bind="item.position"></h4>
+            </li>
+            <li class="profile" ng-repeat="part in partner">
+                <figure>
+                    <img ng-cloak class="img-responsive"
+                         ng-src="{{part.photo}}"/>
+                    <p ng-bind="part.description" class="description"></p>
+                </figure>
+                <h3 ng-bind="part.first_name"></h3>
+                <h4 ng-bind="part.position"></h4>
+            </li>
+        </ul>
+    </div>
+</section>
+<section id="flickrfeed" class="flickr-feed">
+    <ul>
+        <li ng-repeat="part in photos">
+            <a ng-href="{{part.link}}" target="_blank">
+                <img ng-cloak ng-src="{{part.media.m}}" ng-alt="{{part.title}}"
+                     ng-title="{{part.title}}">
+            </a>
+        </li>
+    </ul>
+</section>
+{% endblock %}
