@@ -1,0 +1,131 @@
+{% extends '../layouts/master.html' %}
+{% block bodyAttr %}ng-controller="otaController"{% endblock %}
+{% block content %}
+<div>
+    <div>
+        <p>设备管理 /OTA/添加版本</p>
+    </div>
+    <div class="ota-content">
+        <form class="form-horizontal showcase-form" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">产品型号</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="fileObj.productId">
+                        <option value="">--请选择产品型号--</option>
+                        <option value="GT320">GT320</option>
+                        <option value="GT555">GT555</option>
+                        <option value="MT777">MT777</option>
+                    </select>
+                </div>
+                <span ng-show="!fileObj.productId" class="err" ng-bind="productIdErr"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">升级类型</label>
+
+                <div class="col-sm-4">
+                    <select class="form-control" ng-model="fileObj.type">
+                        <option value="0">完整升级</option>
+                        <option value="1">差分升级</option>
+                    </select>
+                </div>
+                <span ng-show="!fileObj.type" class="err" ng-bind="typeErr"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">版本号</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="fileObj.version">
+                </div>
+                <span ng-show="!fileObj.version" class="err" ng-bind="versionErr"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地域</label>
+
+                <div class="col-sm-4">
+                    <div class="dropdown">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="address_result" readonly="readonly"/>
+                            <span class="input-group-addon" ng-click="vm.dropdown = !vm.dropdown">
+                              <i class="glyphicon glyphicon-chevron-down"></i>
+                            </span>
+                        </div>
+                        <div class=" dropdown-menu collapse" ng-class="{in: vm.dropdown}"
+                             ng-blur="vm.dropdown = false">
+                            <table class="table table-hover ">
+                                <tbody>
+                                <tr ng-repeat="citys in vm.cities" >
+                                    <td ng-repeat="city in citys" ng-click="vm.check(city)">
+                                        <input type="checkbox" ng-checked="city.checked" />
+                                        {{city.province}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">描述</label>
+
+                <div class="col-sm-4">
+                    <textarea rows="3" type="text" class="form-control" ng-model="fileObj.description"></textarea>
+                </div>
+                <span ng-show="!fileObj.description" class="err" ng-bind="descriptionErr"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">文件</label>
+
+                <input id="lefile" type="file" style="display:none" readonly="readonly"
+                       class="col-sm-4 form-control" nv-file-select="" uploader="uploader">
+
+                <div class="input-append">
+                    <div class="col-sm-4">
+                        <input id="photoCover" class="input-large  form-control" readonly="readonly" type="text">
+                    </div>
+                    <button class="btn btn-default " onclick="$('input[id=lefile]').click();">选择</button>
+                    <button class="btn btn-default " ng-click="uploader.queue[uploader.queue.length-1].upload()"
+                            ng-disabled="uploader.queue.length < 1 || uploader.queue[uploader.queue.length-1].isReady || uploader.queue[uploader.queue.length-1].isUploading || uploader.queue[uploader.queue.length-1].isSuccess">
+                        上传
+                    </button>
+                </div>
+
+                <script type="text/javascript">
+                    $('input[id=lefile]').change(function () {
+                        $('#photoCover').val($(this).val());
+                    });
+                </script>
+            </div>
+            <div class="form-group" ng-show="uploader.queue.length > 0">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-4">
+                    <div class="progress ">
+                        <div class="progress-bar " role="progressbar"
+                             ng-style="{ 'width': uploader.queue[uploader.queue.length-1].progress + '%' }"></div>
+                    </div>
+                </div>
+                <span ng-bind="uploadResultStr"></span>
+            </div>
+            <div class="form-group" ng-show="fileOk">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-4">
+                    <span>请上传升级包</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+
+                <div class="col-sm-1">
+                    <button class="btn btn-success form-control" ng-click="save()">保存</button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-default form-control" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

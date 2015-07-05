@@ -13,34 +13,38 @@ var csrf = require('csurf');
 var expressWinston = require('express-winston');
 var config = require('./config');
 
-module.exports = function(app, passport) {
+module.exports = function (app, passport) {
 
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         config.info('Request: ', req.originalUrl);
         next();
     });
 
     // views
-    app.get('/', function(req, res) {
+    app.get('/', function (req, res) {
         res.render('index');
     });
-    app.get('/contact', function(req, res) {
+    app.get('/contact', function (req, res) {
         res.render('contact');
     });
-    app.get('/about', function(req, res) {
+    app.get('/about', function (req, res) {
         res.render('about');
     });
-    app.get('/news', function(req, res) {
+    app.get('/news', function (req, res) {
         res.render('blog');
     });
-    app.get('/work', function(req, res) {
+    app.get('/work', function (req, res) {
         res.render('work');
     });
-    app.get('/projectplan', function(req, res) {
+    app.get('/projectplan', function (req, res) {
         res.render('projectPlan');
     });
-    app.get('/workdetails', function(req, res) {
+    app.get('/workdetails', function (req, res) {
         res.render('workDetails');
+    });
+
+    app.get('/editVersion', function (req, res) {
+        res.render('dm/editVersion');
     });
 
     var api = require('../app/core.server');
@@ -65,30 +69,35 @@ module.exports = function(app, passport) {
     });
     // admin pages
     var admin = require('../app/admin.server');
-    app.route('/admin/login').get(function(req, res) {
+    app.route('/admin/login').get(function (req, res) {
         res.render('admin/login');
     });
     app.route('/admin/logout').get(admin.logout);
-    app.route('/admin').get(auth.requiresLogin, function(req, res) {
+    app.route('/admin').get(auth.requiresLogin, function (req, res) {
         res.render('admin/index');
     });
 
     // admin API
     app.post('/app/admin/login', admin.login);
-    app.post('/app/admin/changepassword',auth.requiresLogin, admin.changePassword);
+    app.post('/app/admin/changepassword', auth.requiresLogin, admin.changePassword);
 
-    app.get('/app/admin/users',auth.needGroup('superuser'), admin.getUsers);
-    app.post('/app/admin/createuser',auth.needGroup('superuser'), admin.createUser);
+    app.get('/app/admin/users', auth.needGroup('superuser'), admin.getUsers);
+    app.post('/app/admin/createuser', auth.needGroup('superuser'), admin.createUser);
 
-    app.get('/app/admin/loglist',auth.needGroup('developer'), admin.getLogList);
-    app.post('/app/admin/logtext',auth.needGroup('developer'), admin.getLogText);
+    app.get('/app/admin/loglist', auth.needGroup('developer'), admin.getLogList);
+    app.post('/app/admin/logtext', auth.needGroup('developer'), admin.getLogText);
 
-    app.get('/app/admin/dblist',auth.needGroup('developer'), admin.getDBList);
-    app.post('/app/admin/restoredb',auth.needGroup('developer'), admin.restoreDB);
-    app.get('/app/admin/backupDB',auth.needGroup('developer'), admin.backupDB);
-    app.post('/app/admin/buildProject',auth.needGroup('developer'), admin.buildProject);
+    app.get('/app/admin/dblist', auth.needGroup('developer'), admin.getDBList);
+    app.post('/app/admin/restoredb', auth.needGroup('developer'), admin.restoreDB);
+    app.get('/app/admin/backupDB', auth.needGroup('developer'), admin.backupDB);
+    app.post('/app/admin/buildProject', auth.needGroup('developer'), admin.buildProject);
 
-    app.get('/app/admin/messages',auth.needGroup('developer'), admin.getMessageList);
+    app.get('/app/admin/messages', auth.needGroup('developer'), admin.getMessageList);
+
+
+    //device manager
+    var dm = require('../app/dm.server');
+    app.get('/dm/ota/editVersion', dm.editVersion);
 
 
     //error handler

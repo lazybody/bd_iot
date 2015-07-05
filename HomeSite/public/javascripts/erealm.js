@@ -4,7 +4,7 @@
  * Created by Ken on 2/08/2014
  */
 
-var erealm = angular.module('erealm', ['ui.bootstrap','pascalprecht.translate','ngCookies','shoppinpal.mobile-menu']);
+var erealm = angular.module('erealm', ['ui.bootstrap','pascalprecht.translate','ngCookies','shoppinpal.mobile-menu','angularFileUpload']);
 erealm.run(['$rootScope','$modal', '$translate', function($rootScope, $modal, $translate) {
 
     $rootScope.showMessage = function(code) {

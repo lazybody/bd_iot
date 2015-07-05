@@ -56,6 +56,7 @@
             <div class="nav-link fa fa-bars" ng-click="$spMenu.toggle()"></div>
             <ul id="navslide">
                 <li class="withripple" ng-class="{active: currentPage == 'home-page'}"><a href="/" translate="home">home</a></li>
+                <li class="withripple" ng-class="{active: currentPage == 'dm-page'}"><a href="/editVersion" translate="device_manager">device manager</a></li>
                 <li class="withripple" ng-class="{active: currentPage == 'blog-page'}"><a href="/news" translate="blog">news</a><span class="blog-badge ng-hide" ng-bind="postsNotification" ng-show="postsNotification > 0">1</span></li>
                 <li class="withripple" ng-class="{active: currentPage == 'contact-page'}"><a href="/contact" translate="contact">contact</a></li>
                 <li class="withripple" ng-class="{active: currentPage == 'about-page'}"><a href="/about" translate="about">about</a></li>
@@ -128,6 +129,7 @@
 <script src="/javascripts/libs/plugins/material.min.js"></script>
 <script src="/javascripts/libs/plugins/ripples.min.js"></script>
 <script src="http://127.0.0.1:35729/livereload.js" cache="false"></script>
+<script src="/javascripts/libs/angular-file-upload/angular-file-upload.js"></script>
 <!-- endbuild -->
 <!-- build:js /javascripts/app.min.js -->
 <script src="/javascripts/erealm.js"></script>
@@ -140,6 +142,7 @@
 <script src="/javascripts/app/workController.js"></script>
 <script src="/javascripts/app/projectController.js"></script>
 <script src="/javascripts/app/workDetailsController.js"></script>
+<script src="/javascripts/app/dmController.js"></script>
 <!-- endbuild -->
 <script>
     angular.element(document).ready(function() {
