@@ -1,0 +1,39 @@
+<div class="backstage-wrap-left">
+    <div class="backstage-left-tab c-tab-list">
+        <script>
+            var first_nav = ["设备注册", "设备部署", "设备控制", "故障管理"];
+            var first_nav_class = ["one", "three", "two", "four"];
+            var second_nav = [["注册", "查看"], ["全部工程","OTA", "设备升级"], ["命令转发", "设置参数修改"], ["日志查看"]];
+            var second_href = [["/reg/list","/reg/device"],["/deploy/project","/ota","/ota/user_device"],[],[]];
+            for (var i = 0; i < first_nav.length; i++) {
+                document.write("<div class=\"left-tab-wrap c-tab-wrap\"><h2>");
+                document.write("<a href=\"#\" title=\""+first_nav[i]+"\">");
+                document.write("<span class=\"left-tab-icon position-"+first_nav_class[i]+"\"></span>");
+                document.write("<p class=\"left-tab-title\">"+first_nav[i]+"</p>");
+
+                var index = "<%=siderbar_active%>";
+                if(i == index) {
+                    document.write("<em class=\"single-top\"></em>");
+                }else{
+                    document.write("<em class=\"single-bottom\"></em>");
+                }
+                document.write("</a></h2>");
+
+                if(i == index) {
+                    document.write("<ul class=\"tab-wrap-stroe  \">");
+                } else {
+                    document.write("<ul class=\"tab-wrap-stroe  c-tab-disp\">");
+                }
+
+                for (var j = 0; j < second_nav[i].length; j++){
+                    var href = "";
+                    if (second_href[i][j]){
+                        href = second_href[i][j];
+                    }
+                    document.write(" <li><a href=\""+href+"\"><strong class=\"dot\">·</strong>"+second_nav[i][j]+"</a></li>");
+                }
+                document.write("</ul></div>");
+            };
+        </script>
+    </div>
+</div>

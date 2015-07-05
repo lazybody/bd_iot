@@ -43,6 +43,9 @@ module.exports = function (app, passport) {
         res.render('workDetails');
     });
 
+    app.get('/ota', function (req, res) {
+        res.render('dm/otaManager');
+    });
     app.get('/editVersion', function (req, res) {
         res.render('dm/editVersion');
     });
@@ -97,6 +100,7 @@ module.exports = function (app, passport) {
 
     //device manager
     var dm = require('../app/dm.server');
+    app.get('/dm/otas', dm.ota);
     app.get('/dm/ota/editVersion', dm.editVersion);
 
 
